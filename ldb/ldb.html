@@ -1,0 +1,75 @@
+<head>
+  <title> Leaderboard </title>
+  <h1> <u> Leaderboard  </u> </h1>
+</head>
+
+<body>
+<p>
+
+  <div id="outer">
+  <p>
+  <!-- Displays the leaderboad -->
+    {{> leaderboard}}
+    <!-- allows player to choose sort of board -->
+    {{>order}}
+    <!-- resets scores to 0 -->
+    {{>reset}}
+   </p>
+  </div>
+  </p>
+  
+
+
+</body>
+
+<template name="leaderboard">
+  <div class="leaderboard">
+  <!-- Add new player form -->
+  {{> addPlayerForm}}
+  <p>
+    {{#each members}} <!-- Displays the list of players -->
+      {{> player}}
+    {{/each}}
+	</p>
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    Selected Player :<div class="name"> {{selected_name}}</div> <!-- Displays selected player -->
+    <input type="button" class="inc" value="Give 5 points " /> <!-- Adds 5 points -->
+    <input type="button" class="dec" value="Take 5 points" /> <!-- Deducts 5 points -->
+  </div>
+  {{else}}
+  <div class="none">Click a player to Select</div>
+  {{/if}}
+</template>
+
+<template name="order">
+    <div class="sort_order"> <!-- sorts the order of player names -->
+    {{#if sort_by_score}}
+    <input type="button" class="name" value="Sort by name"/>
+    {{else}}
+    <input type="button" class="score" value="Sort by score"/>
+    {{/if}}
+  </div>
+</template>
+
+<template name="player">
+  <div class="player {{selected}}">    <!-- displays the name and score of each player -->
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
+<template name="reset">
+  <div class="reset"> <!-- Resets the score to 0. -->
+    <input type="button" class="score_reset" value="Start over"/>
+  </div>
+</template>
+
+<template name="addPlayerForm">
+<form>
+<input type="text" name="playerName">
+<input type="submit" value="Add Player">
+</form>
+</template>
